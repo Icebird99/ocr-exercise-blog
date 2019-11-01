@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from 'src/app/shared/post';
-import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-post-list-item',

@@ -8,7 +8,6 @@ export class Post {
     constructor(title : string, content : string, created_at : Date = new Date(), loveIts: number = 0){
       this.title = title;
       this.content = content;
-      this.loveIts = 0;
       this.created_at = created_at;
       this.loveIts = loveIts;
     }
