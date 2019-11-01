@@ -1,0 +1,17 @@
+div.likes-container{
+    display: grid;
+}
+div.likes-container > span:first-child{
+    font-size: 42px;   
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+
+div.likes-container > span:last-child{
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 38px;  
+    text-align: center;           
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
