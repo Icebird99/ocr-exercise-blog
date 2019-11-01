@@ -22,10 +22,7 @@
             <button class="btn btn-danger" (click)="post.likeIt(false)">Hate It!</button>
         </div>
         <div class="col-">
-            <div class="likes-container">
-                <span class="material-icons">favorite_border</span>
-                <span>{{ post.loveIts }}</span>
-            </div>
+            <app-like-icon [likes]="post.loveIts"></app-like-icon>
         </div>
     </div>    
 </li>

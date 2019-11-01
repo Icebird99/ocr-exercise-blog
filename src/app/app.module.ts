@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
+import { LikeIconComponent } from './components/like-icon/like-icon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostListComponent,
     PostListItemComponent,
-    PostFormComponent
+    PostFormComponent,
+    LikeIconComponent
   ],
   imports: [
     BrowserModule,
