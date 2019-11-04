@@ -7,6 +7,9 @@ import { PostListComponent } from './components/post-list/post-list.component';
 import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
 import { LikeIconComponent } from './components/like-icon/like-icon.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ClarityModule } from '@clr/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { LikeIconComponent } from './components/like-icon/like-icon.component';
     PostListComponent,
     PostListItemComponent,
     PostFormComponent,
-    LikeIconComponent
+    LikeIconComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ClarityModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
