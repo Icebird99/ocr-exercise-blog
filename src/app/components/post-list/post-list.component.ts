@@ -3,7 +3,6 @@ import { Post } from 'src/app/shared/post.model';
 import * as _ from 'underscore';
 import { Subscription } from 'rxjs';
 import { PostService } from 'src/app/shared/post.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
@@ -16,8 +15,7 @@ export class PostListComponent implements OnInit {
   postsSubscription: Subscription;
 
   constructor(
-    private postService: PostService,
-    private router: Router
+    private postService: PostService
   ) {}
 
   ngOnInit() {

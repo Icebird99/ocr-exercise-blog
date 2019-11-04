@@ -3,6 +3,9 @@ import { Post } from './post.model';
 import { Subject } from 'rxjs';
 import * as _ from 'underscore';
 import { ToastrService } from 'ngx-toastr';
+import * as firebase from 'firebase';
+import Datasnapshot = firebase.database.DataSnapshot;
+import { post } from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +19,43 @@ export class PostService {
     private toastr: ToastrService
   ) {
     this.getPosts();
-   }
+  }
 
-   emitPosts(){
-     this.postsSubject.next(this.posts);
-   }
+  emitPosts(){
+    this.postsSubject.next(this.posts);
+  }
 
-   savePosts(){
-     //TODO firebase
-   }
+  savePosts(){
+    firebase.database().ref('/posts').set(_.map(this.posts, function(post){
+      // As firebase doesn't accept Date object, we convert created_at
+      // in timestamp
+      return {
+        title: post.title,
+        content: post.content,
+        id: post.id,
+        loveIts: post.loveIts,
+        created_at: post.created_at ? post.created_at.getTime() : new Date().getTime()
+      }
+    }));
+  }
 
    getPosts(){
-    // TODO: firebase
-    // For fun, let's provide some initial posts, with random created_at and likes
-    this.posts = [
+    firebase.database().ref('/posts')
+    .on('value', (data: Datasnapshot) => {
+        this.posts = data.val() ? data.val() : [];
+        // When retrieving the posts, we need to convert created_at
+        // back to a date object
+        this.posts = _.map(this.posts, function(post){
+          post.created_at = new Date(post.created_at);
+          return post;
+        });
+        this.emitPosts();
+      }
+    );
+
+    // This array for the inital posts is not used anymore.
+    // I keep it for the Math one the dates and to recreate the posts if needed
+    const posts = [
       new Post(
         2,
         "My second post, what imagination!",
@@ -49,6 +75,7 @@ export class PostService {
         new Date(new Date().getTime() - Math.ceil(Math.random() * 1000 * 60 * 60 * 24)),
         Math.ceil(Math.random() * 20 - 5))
     ];
+
     this.sortPosts();
     this.emitPosts();
   }
@@ -57,19 +84,27 @@ export class PostService {
     _.find(this.posts, function(p){
       return p.id === post.id
     }).loveIts += like ? 1 : -1;
+    this.savePosts();
     this.emitPosts();
   }
 
   createPost(post: Post){
-    post.id = _.max(this.posts, function(post){return post.id}).id + 1;
+    post.created_at = new Date();
+    if (this.posts.length > 0){
+      post.id = _.max(this.posts, function(post){return post.id}).id + 1;
+    } else {
+      post.id = 1;
+    }
     this.posts.push(post);
     this.posts = this.posts.slice();
+    this.savePosts();
     this.emitPosts();
     this.toastr.success("Post created!");
   }
 
   deletePost(post: Post){
     this.posts = _.reject(this.posts, function(p){return p.id === post.id});
+    this.savePosts();
     this.emitPosts();
     this.toastr.warning("Post deleted!");
   }
