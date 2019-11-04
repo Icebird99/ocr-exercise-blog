@@ -1,5 +1,6 @@
 div{
     display: grid;
+    width: 42px;
 }
 span:first-child{
     font-size: 42px;   
