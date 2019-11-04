@@ -11,6 +11,7 @@ import { LikeIconComponent } from './components/like-icon/like-icon.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from './shared/dialog/dialog.module';
 
 
 const appRoutes: Routes = [
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
