@@ -1,6 +1,9 @@
-<ul class="list-group">
-    <app-post-list-item 
-        *ngFor="let post of posts" 
+<div class="clr-row">
+  <div class=clr-col-1></div>
+  <div class="clr-col-10">
+    <app-post-list-item
+        *ngFor="let post of posts"
         [post]="post">
     </app-post-list-item>
-</ul>
+  </div>
+</div>

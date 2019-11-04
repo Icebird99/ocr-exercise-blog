@@ -1,4 +1,7 @@
-<div class="likes-container">
-    <span class="material-icons">favorite_border</span>
+<div class="likes-container"
+[ngClass]="{
+  'like': likes > 0,
+  'dislike': likes < 0}">
+    <clr-icon shape="heart"></clr-icon>
     <span>{{ likes }}</span>
 </div>

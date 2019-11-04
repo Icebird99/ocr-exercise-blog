@@ -1,18 +1,25 @@
 div{
-    display: grid;
-    width: 42px;
+  display: grid;
+  width: 42px;
 }
-span:first-child{
-    font-size: 42px;   
-    grid-column-start: 1;
-    grid-row-start: 1;
+div.like{
+  color: #2F8400;
+}
+div.dislike{
+  color: #C92100;
 }
 
-span:last-child{
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 38px;  
-    text-align: center;           
-    grid-column-start: 1;
-    grid-row-start: 1;
+clr-icon{
+  height: 42px;
+  width: 42px;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+span{
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 40px;
+  text-align: center;
+  grid-column-start: 1;
+  grid-row-start: 1;
 }
