@@ -1,10 +1,21 @@
-<form>
-    <h4>Create a new post</h4>
-    <div class="form-group">
-        <input class="form-control" name="title" [(ngModel)]="post.title">
-    </div>
-    <div class="form-group">
-        <textarea class="form-control" name="content" [(ngModel)]="post.content"></textarea>
-    </div>
-    <button (click)="createPost()" class="btn btn-primary">Add</button>
-</form>
+<div class="clr-row clr-justify-content-center">
+  <div class="clr-col-auto">
+    <form clrForm
+        [formGroup]="postForm"
+        (ngSubmit)="onCreatePost()">
+      <clr-input-container>
+        <label>Title</label>
+        <input clrInput formControlName="title" type="text"/>
+        <clr-control-error>Title required</clr-control-error>
+      </clr-input-container>
+      <clr-textarea-container>
+        <label>Content</label>
+        <textarea clrTextarea formControlName="content" rows="5"></textarea>
+        <clr-control-error>Content required</clr-control-error>
+      </clr-textarea-container>
+      <div class="align-center">
+        <button class="btn" [disabled]="postForm.invalid">Create</button>
+      </div>
+    </form>
+  </div>
+</div>

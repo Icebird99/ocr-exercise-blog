@@ -20,7 +20,6 @@ export class PostListComponent implements OnInit {
     private router: Router
   ) {}
 
-  // Sort the initial list by created_at
   ngOnInit() {
     this.postsSubscription = this.postService.postsSubject.subscribe(
       (posts: Post[]) => {
@@ -28,11 +27,9 @@ export class PostListComponent implements OnInit {
       }
     )
     this.postService.emitPosts();
-    //this.sortList();
   }
 
-  sortList = function(){
-    this.posts = _.sortBy(this.posts, function(post : Post){return post.created_at;});
+  ngOnDestroy() {
+    this.postsSubscription.unsubscribe();
   }
-
 }

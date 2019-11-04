@@ -1,0 +1,12 @@
+div.clr-row{
+  margin: 0;
+}
+div.clr-row > div.clr-col-auto{
+  width: 400px;
+}
+input, textarea{
+  width: 300px;
+}
+div.align-center{
+  text-align: center;
+}

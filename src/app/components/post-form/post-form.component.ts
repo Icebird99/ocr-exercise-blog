@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Post } from 'src/app/shared/post.model';
+import { PostService } from 'src/app/shared/post.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-post-form',
@@ -8,20 +11,31 @@ import { Post } from 'src/app/shared/post.model';
 })
 export class PostFormComponent implements OnInit {
 
-  @Input() post : Post;
-  @Output('post') _post = new EventEmitter<Post>();
+  postForm: FormGroup;
 
-  constructor() { 
-    this.post = new Post("","");
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private postService: PostService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    this.initForm();
   }
 
-  createPost = function(){
-    this.post.created_at = new Date();
-    this._post.emit(this.post);
-    this.post = new Post("","");
+  initForm(){
+    this.postForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      content: ['', Validators.required]
+    });
+  }
+
+  onCreatePost = function(){
+    const title = this.postForm.get('title').value;
+    const content = this.postForm.get('content').value;
+    const post = new Post(0, title, content,  new Date());
+    this.postService.createPost(post);
+    this.router.navigate(['/posts']);
   }
 
 }

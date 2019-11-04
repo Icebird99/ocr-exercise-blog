@@ -20,8 +20,11 @@
   <div class="card-footer">
     <div class="clr-row">
       <div class="clr-col">
-        <button class="btn btn-success" (click)="post.likeIt(true)">Love It!</button>
-        <button class="btn btn-danger" (click)="post.likeIt(false)">Hate It!</button>
+        <button class="btn btn-success" (click)="onLikeIt(true)">Love It!</button>
+        <button class="btn btn-danger" (click)="onLikeIt(false)">Hate It!</button>
+        <button class="btn btn-secundary" (click)="onDelete()">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
       </div>
       <div class="clr-col-">
         <app-like-icon [likes]="post.loveIts"></app-like-icon>
