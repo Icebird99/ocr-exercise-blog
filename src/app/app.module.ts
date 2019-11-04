@@ -13,6 +13,7 @@ import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from './shared/dialog/dialog.module';
 import { ToastrModule } from 'ngx-toastr';
+import { PostService } from './shared/post.service';
 
 
 const appRoutes: Routes = [
@@ -42,7 +43,9 @@ const appRoutes: Routes = [
     DialogModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    PostService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
