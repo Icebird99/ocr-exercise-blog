@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from 'src/app/shared/post';
+import { Post } from 'src/app/shared/post.model';
 import * as _ from 'underscore';
+import { Subscription } from 'rxjs';
+import { PostService } from 'src/app/shared/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
@@ -9,14 +12,23 @@ import * as _ from 'underscore';
 })
 export class PostListComponent implements OnInit {
 
-  @Input() posts : Post[];
+  posts : Post[];
+  postsSubscription: Subscription;
 
-  constructor() { 
-  }
+  constructor(
+    private postService: PostService,
+    private router: Router
+  ) {}
 
   // Sort the initial list by created_at
   ngOnInit() {
-    this.sortList();
+    this.postsSubscription = this.postService.postsSubject.subscribe(
+      (posts: Post[]) => {
+        this.posts = posts;
+      }
+    )
+    this.postService.emitPosts();
+    //this.sortList();
   }
 
   sortList = function(){
